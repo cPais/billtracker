@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	
+		<!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<title>Save Bill</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<h3>Bill Directory</h3>
+			<hr>
+			
+			<p class="h4 mb-4">Save Bill</p>
+			
+			<form action="#" th:action="@{/bills/save}"
+							 th:object="${bill}" method="POST">
+					
+					<!-- Add hidden for field to handle update -->
+					<input type="hidden" th:field="*{id}" />
+					
+					Company Name <input  type="text" th:field="*{companyName}"
+							class="form-control mb-4 col-4" >
+					
+					Company Number<input type="text" th:field="*{companyNumber}"
+							class="form-control mb-4 col-4" >
+					
+					Bill Amount<input type="number" th:field="*{amount}"
+							class="form-control mb-4 col-4" >
+							
+					Date Due<input type="date" th:field="*{dateDue}"
+							class="form-control mb-4 col-4" >
+							
+					Date Paid<input type="date" th:field="*{datePaid}"
+							class="form-control mb-4 col-4" >
+							
+					Payment Made<input type="checkbox"  th:field="*{paid}"
+							class="form-control mb-4 col-4 " >
+							
+					<button type="submit" class="btn btn-info col-2">Save</button>
+			
+			</form>
+			<hr>
+			<a th:href="@{/bills/list}">Back to Bill List</a>
+		</div>
+	
+	</body>
+
+</html>

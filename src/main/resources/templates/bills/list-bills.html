@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<title>Bills Directory</title>
+</head>
+
+<body>
+	<div class="container">
+		
+		<h3>Bills Directory</h3>
+		<hr>
+		<!-- Add a button -->
+		<a th:href="@{/bills/showFormForAdd}"
+			class="btn btn-primary btn-lg mb-3">
+			Add bill
+		</a>
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Company Name</th>
+					<th>Company Number</th>
+					<th>Amount</th>
+					<th>Date Due</th>
+					<th>Date Paid</th>
+					<th>Paid</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="tempBill :${bills}">
+					<td th:text="${tempBill.companyName}" />
+					<td th:text="${tempBill.companyNumber}" />
+					<td th:text="${tempBill.amount}" />
+					<td th:text="${#temporals.format(tempBill.dateDue,'MM/dd/yyyy')}" />
+					<td th:text="${#temporals.format(tempBill.datePaid,'MM/dd/yyyy')}" />
+						 
+				<!-- <td th:text="${tempBill.paid}" /> -->
+				<td th:switch="${tempBill.paid}"> 
+				  <span th:case="true"><input type="checkbox" disabled checked></span>
+				  <span th:case="false"><input type="checkbox" disabled> </span>
+				</td>
+					
+					<!-- Add update button/link -->
+					<td>
+						<a th:href="@{/bills/showFormForUpdate(billId=${tempBill.id})}"
+							class="btn btn-info btn-sm"> 
+							Update
+						</a>
+					
+					<!-- Add delete button/link -->
+					
+						<a th:href="@{/bills/delete(billId=${tempBill.id})}"
+							class="btn btn-danger btn-sm"
+							onclick="if (!(confirm('Are you sure you want to delete this bill?'))) return false"> 
+							Delete
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		
+		</table>
+	</div>
+</body>
+
+
+</html>
